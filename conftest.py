@@ -14,14 +14,8 @@ def browser(request):
     print("\nstart browser for test..")
     language = request.config.getoption("language")
     options = Options()
-    # Реализуем английский интерфейс
-    if language == "en":
-        options.add_experimental_option('prefs', {'intl.accept_languages': "en"})
-        browser = webdriver.Chrome(options=options)
-    # Реализуем русский инетрфейс
-    if language == "ru":
-        options.add_experimental_option('prefs', {'intl.accept_languages': "ru"})
-        browser = webdriver.Chrome(options=options)
+    options.add_experimental_option('prefs', {'intl.accept_languages': language})
+    browser = webdriver.Chrome(options=options)
     yield browser
     time.sleep(10)
     print("\nquit browser..")
